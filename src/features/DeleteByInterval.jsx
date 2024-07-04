@@ -4,6 +4,7 @@ import { useDeleteSensorReadingByIntervalOptimizedMutation,useDeleteSensorReadin
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { intervalOptions } from './constants';
+import { customStyles } from '../constants';
 
 const DeleteByInterval = () => {
     const [sensor, setSensor] = useState(null);
@@ -28,12 +29,12 @@ const DeleteByInterval = () => {
 
     useEffect(() => {
         if(deleteSensorOptimizedResults.data){
-            setUnoptimizedData((prev) => [...prev,deleteSensorOptimizedResults.data.time])
+            setOptimizedData((prev) => [...prev,deleteSensorOptimizedResults.data.time])
         }
     },[deleteSensorOptimizedResults.data])
     useEffect(() => {
         if(deleteSensorUnoptimizedResults.data){
-            setOptimizedData((prev) => [...prev,deleteSensorUnoptimizedResults.data.time])
+            setUnoptimizedData((prev) => [...prev,deleteSensorUnoptimizedResults.data.time])
         }
     },[deleteSensorUnoptimizedResults.data])
 
@@ -64,7 +65,7 @@ const DeleteByInterval = () => {
 
     const options = useMemo(( ) => ({
         title: {
-            text: 'Response times for measurements by interval'
+            text: 'Response times for deleting by interval'
         },
         xAxis: {
             title: {
@@ -87,11 +88,15 @@ const DeleteByInterval = () => {
             data: unoptimizedData
         }],
     }),[optimizedData,unoptimizedData]);
+
+
     return (
-        <div>
+        <div className='delete-by-interval'>
+                  <h2>Delete by interval</h2>
             <form onSubmit={handleSubmit}>
                 <label>Select Sensor:</label>
                 <Select
+                  styles={customStyles}
                   disabled={deleteSensorOptimizedResults.isLoading || deleteSensorUnoptimizedResults.isLoading}
                     value={sensor}
                     onChange={handleSensorChange}
@@ -100,6 +105,7 @@ const DeleteByInterval = () => {
 
                 <label>Select Interval:</label>
                 <Select
+                styles={customStyles}
                     disabled={deleteSensorUnoptimizedResults.isLoading || deleteSensorOptimizedResults.isLoading}
                     value={interval}
                     onChange={handleIntervalChange}

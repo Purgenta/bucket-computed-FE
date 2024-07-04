@@ -6,6 +6,9 @@ import Select from 'react-select'
 import HighchartsReact from 'highcharts-react-official'
 import IntervalResponse from './features/IntervalResponse'
 import DeleteByInterval from './features/DeleteByInterval'
+import BenchmarkWrite from './features/BenchmarkWrite'
+import CollectionStats from './features/CollectionStats'
+import { customStyles } from './constants'
 function App() {
   const [optimizedResponseTimes,setOptimizedResponseTimes] = useState([])
   const [unoptimizedResponseTimes,setUnoptimizedResponseTimes] = useState([])
@@ -58,10 +61,14 @@ function App() {
       }],
     }
   },[optimizedResponseTimes,unoptimizedResponseTimes])
+
+
+
+
   return (
   <div className="app">
     <h2>Selected sensor</h2>
-      <Select isDisabled={optimizedIsFetching || unoptimizedIsFetching} onChange={(newValue) => {
+      <Select styles={customStyles} isDisabled={optimizedIsFetching || unoptimizedIsFetching} onChange={(newValue) => {
         setSensor(newValue.value)
       } } label={'Sensor options'} options={cmbxOptions}></Select>
       <HighchartsReact
@@ -72,6 +79,8 @@ function App() {
       <h2>Sensor by interval</h2>
       <IntervalResponse/>
       <DeleteByInterval/>
+      <BenchmarkWrite/>
+      <CollectionStats/>
     </div>
   )
 }

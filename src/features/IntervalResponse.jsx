@@ -4,6 +4,7 @@ import Select from 'react-select'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { intervalOptions } from './constants';
+import { customStyles } from '../constants';
 const IntervalResponse = () => {
     const [sensor,setSensor] = useState('')
     const [interval,setInterval] = useState('')
@@ -30,7 +31,7 @@ const IntervalResponse = () => {
 
     const options = useMemo(() => ({
         title: {
-          text: 'Response times for measurements by interval'
+          text: 'Response times for interval measurements'
         },
         xAxis: {
           title: {
@@ -54,12 +55,14 @@ const IntervalResponse = () => {
         }],
 
     }),[optimizedResponseTimes,unoptimizedResponseTimes])
-
+ 
   return (
-    <div><Select isDisabled={optimizedIsFetching || unoptimizedIsFetching} onChange={(newValue) => {
+    <div>
+       <label>Select Sensor:</label><Select styles={customStyles} isDisabled={optimizedIsFetching || unoptimizedIsFetching} onChange={(newValue) => {
         setSensor(newValue.value)
       } } label={'Sensor options'} options={cmbxOptions}></Select>
-      <Select isDisabled={optimizedIsFetching || unoptimizedIsFetching} onChange={(newValue) => {
+       <label>Select Interval:</label>
+      <Select styles={customStyles} isDisabled={optimizedIsFetching || unoptimizedIsFetching} onChange={(newValue) => {
         setInterval(newValue.value)
       } } label={'Interval options'} options={intervalOptions}></Select>
       <HighchartsReact

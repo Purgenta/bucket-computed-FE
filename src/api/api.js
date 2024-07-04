@@ -29,9 +29,19 @@ const sensorApi = createApi({
       }),
       getResponseTimeBySensorAndInterval: builder.query({
         query: (sensorId,interval) => ({ url: `sensor/responseTime/${sensorId}/${interval}` }),
+      }),
+      getBenhmarkWrite: builder.query({
+        query: () => `sensor/benchmarkWrite`,
+      }),
+      getOptimizedCollectionStats: builder.query({
+        query: () => `sensor/optimizedCollectionStats`,
+      }),
+      unoptimizedCollectionStats: builder.query({
+        query: () => `sensor/unoptimizedCollectionStats`,
       })
+
     }),
   })
 
-export const { useGetSensorsQuery,useGetAvgBySensorOptimizedQuery,useDeleteSensorReadingByIntervalOptimizedMutation,useDeleteSensorReadingByIntervalUnoptimizedMutation,useGetSensorByIntervalOptimizedQuery,useGetSensorByIntervalUnoptimizedQuery,useGetAvgBySensorUnoptimizedQuery} = sensorApi
+export const { useGetSensorsQuery,useGetOptimizedCollectionStatsQuery,useUnoptimizedCollectionStatsQuery,useGetBenhmarkWriteQuery,useGetAvgBySensorOptimizedQuery,useDeleteSensorReadingByIntervalOptimizedMutation,useDeleteSensorReadingByIntervalUnoptimizedMutation,useGetSensorByIntervalOptimizedQuery,useGetSensorByIntervalUnoptimizedQuery,useGetAvgBySensorUnoptimizedQuery} = sensorApi
 export default  sensorApi

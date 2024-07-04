@@ -15,3 +15,9 @@
 .app {
   min-width: 80%;
 }
+label {
+  margin-bottom: 10px;
+}
+.delete-by-interval {
+  margin: 10px
+}
